@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}금융용어사전 - 분류{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 fw-bold text-center mb-4">금융용어 필터링</h1>
+
+    <!-- 검색창 -->
+    <form method="get" action="/plus/terms/search" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="용어 검색" required>
+            <button class="btn btn-primary" type="submit">검색</button>
+        </div>
+    </form>
+
+    <!-- ㄱㄴㄷ A-Z 버튼 필터 -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+        <a href="/plus/terms" class="btn btn-outline-primary">전체</a>
+        {% for category in categories %}
+            <a href="/plus/terms/list/{{ category }}" class="btn btn-outline-secondary">{{ category }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

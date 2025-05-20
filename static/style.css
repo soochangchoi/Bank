@@ -1,0 +1,137 @@
+/* ✅ 전체 페이지 기본 레이아웃 */
+.main-page {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.main-page .div {
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.main-page .overlap {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.main-page .element-intro {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.main-page .img,
+.main-page .element-4 {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.main-page .element-3,
+.main-page .element-2,
+.main-page .element,
+.main-page .text-wrapper,
+.main-page .text-wrapper-2,
+.main-page .p {
+  position: static;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ✅ 배너 영역 */
+.main-page .banner {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.main-page .group,
+.main-page .group-2 {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.main-page .element-line {
+  display: block;
+  margin: 40px auto;
+  width: 80%;
+  height: 2px;
+  background-color: #ccc;
+}
+
+/* ✅ 상단 헤더 영역 */
+.main-page .element-header {
+  width: 100%;
+  max-width: 1920px;
+  margin-top: 0;
+}
+
+.main-page .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+}
+
+.main-page .logo,
+.main-page .line {
+  max-width: 80%;
+  height: auto;
+}
+
+.main-page .text-wrapper-9,
+.main-page .text-wrapper-10,
+.main-page .text-wrapper-11,
+.main-page .text-wrapper-12 {
+  position: static;
+  font-size: 20px;
+  margin: 0 12px;
+}
+
+/* ✅ 하단 기능 소개 (가로 정렬 박스) */
+.features-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 48px;
+  padding: 60px 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feature-box {
+  width: 280px;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+.feature-box img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.feature-box h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.feature-box p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555555;
+}

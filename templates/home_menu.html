@@ -1,0 +1,52 @@
+{% set no_container = True %}
+{% extends 'base.html' %}
+
+{% block title %}MOAPLUS{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='globals.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<!-- ✅ 1. 상단 배너 Carousel -->
+<div id="mainBannerCarousel" class="carousel slide mb-2" data-bs-ride="carousel" style="margin-bottom: 0 !important;">
+  <div class="carousel-inner text-center">
+    <div class="carousel-item active">
+      <img src="{{ url_for('static', filename='img/banner1.png') }}" class="d-block mx-auto" alt="배너1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/banner2.png') }}" class="d-block mx-auto" alt="배너2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/banner3.png') }}" class="d-block mx-auto" alt="배너3">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ url_for('static', filename='img/banner4.png') }}" class="d-block mx-auto" alt="배너4">
+    </div>
+  </div>
+  <div class="carousel-indicators mt-2">
+    <button type="button" data-bs-target="#mainBannerCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#mainBannerCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#mainBannerCarousel" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#mainBannerCarousel" data-bs-slide-to="3"></button>
+  </div>
+</div>
+
+<!-- ✅ 3. 가로 정렬된 기능 소개 -->
+<div class="features-container">
+  <div class="feature-box">
+    <img src="{{ url_for('static', filename='img/01-1.png') }}" alt="금융매칭">
+    <h5>나만을 위한 금융매칭</h5>
+    <p>수백만가지 경우의 수를 계산하는 추천 알고리즘이<br>나를 위한 맞춤 상품을 찾아드립니다.</p>
+  </div>
+  <div class="feature-box">
+    <img src="{{ url_for('static', filename='img/03-1.png') }}" alt="금융 데이터">
+    <h5>국내 최초 2030 금융상품 데이터</h5>
+    <p>복잡하고 어려운 금융상품의 전월 실적, 한도 조건 데이터를 모두 챙겼습니다.</p>
+  </div>
+  <div class="feature-box">
+    <img src="{{ url_for('static', filename='img/02-2.png') }}" alt="정확한 비교">
+    <h5>정확한 비교</h5>
+    <p>모아플러스는 쉽고 정확하게 비교합니다.<br>내게 맞는 금융상품, 비교하기 힘드셨죠?</p>
+  </div>
+</div>
+{% endblock %}

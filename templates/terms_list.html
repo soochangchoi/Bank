@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category }} 용어 리스트{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 fw-bold text-center mb-4">{{ category }} 용어</h1>
+
+    <!-- 검색창 -->
+    <form method="get" action="/plus/terms/search" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="query" class="form-control" placeholder="용어 검색" required>
+            <button class="btn btn-primary" type="submit">검색</button>
+        </div>
+    </form>
+
+    {% if terms %}
+        <div class="list-group">
+            {% for t in terms %}
+                <a href="/plus/terms/detail/{{ t['용어'] }}" class="list-group-item list-group-item-action">{{ t['용어'] }}</a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">해당 조건의 용어가 없습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

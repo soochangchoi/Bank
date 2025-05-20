@@ -1,0 +1,71 @@
+
+{% extends 'base.html' %}
+
+{% block title %}대출 상품 목록{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 fw-bold text-center mb-4">대출 상품</h1>
+
+    <!-- ✔ 카테고리 필터 버튼 -->
+    <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+        <button class="btn btn-outline-dark active" onclick="filterLoans('전체')">전체</button>
+        <button class="btn btn-outline-dark" onclick="filterLoans('햇살론')">햇살론</button>
+        <button class="btn btn-outline-dark" onclick="filterLoans('새희망홀씨')">새희망홀씨</button>
+        <button class="btn btn-outline-dark" onclick="filterLoans('사잇돌')">사잇돌</button>
+        <button class="btn btn-outline-dark" onclick="filterLoans('비상금')">소액비상금</button>
+        <button class="btn btn-outline-dark" onclick="filterLoans('기타')">기타</button>
+    </div>
+
+    <!-- ✔ 상품 리스트 -->
+    <div id="loans-list">
+        {% for product in products %}
+        <div class="card shadow-sm mb-4 border rounded loan-card" data-name="{{ product['상품명'] }}">
+            <div class="card-body">
+                <h5 class="card-title fw-bold text-primary">{{ product['상품명'] }}</h5>
+                <p class="mb-1"><strong>금융회사명:</strong> {{ product['금융회사명'] }}</p>
+                <p class="mb-1"><strong>기본금리:</strong> {{ product['기본금리(%)'] }}</p>
+                <p class="mb-1"><strong>가입대상:</strong> {{ product['가입대상'] }}</p>
+                <p class="mb-1"><strong>저축기간:</strong> {{ product['저축기간(개월)'] }}개월</p>
+                <p class="mb-1"><strong>대출한도:</strong> {{ product['대출한도'] }}</p>
+                <p class="mb-1"><strong>상환방식:</strong> {{ product['상환방식'] }}</p>
+                <p class="mb-1"><strong>만기이자:</strong> {{ product['만기이자'] }}</p>
+            </div>
+            <div class="card-footer bg-white text-end border-0">
+                <a href="/loans/detail/{{ product['상품명'] }}" class="btn btn-outline-primary btn-sm">자세히 보기</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function filterLoans(category) {
+        document.querySelectorAll('.btn-outline-dark').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        document.querySelectorAll('.loan-card').forEach(card => {
+            const name = card.getAttribute('data-name').toLowerCase();
+
+            if (category === '전체') {
+                card.style.display = 'block';
+            } else if (category === '기타') {
+                if (!name.includes('햇살론') &&
+                    !name.includes('새희망홀씨') &&
+                    !name.includes('사잇돌') &&
+                    !name.includes('비상금')) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            } else {
+                if (name.includes(category.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

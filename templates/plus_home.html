@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}모아플러스{% endblock %}
+
+{% block content %}
+<div class="container text-center my-5">
+    <h1 class="display-4 fw-bold mb-5">MOAPLUS</h1>
+
+    <!-- 섹션1: 금융 바로알기 -->
+    <div class="mb-5">
+        <h2 class="fw-bold mb-4">📘 Step 1. 금융, 이제는 쉽고 재미있게</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <a href="/plus/terms" class="btn btn-lg btn-outline-info w-100 py-4 fs-4">금융용어사전</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 섹션2: 청년을 위한 지원사업 -->
+    <div class="mb-5">
+        <h2 class="fw-bold mb-4">🌱 Step 2. 청년들을 위한 지원 사업</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <a href="/plus/youth" class="btn btn-lg btn-outline-success w-100 py-4 fs-4">청년정책 안내</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
