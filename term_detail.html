@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ term }} 상세 설명{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="display-4 fw-bold text-center mb-4">{{ term }}</h1>
+    <div class="lead mb-4">{{ description }}</div>
+    <a href="/plus/terms" class="btn btn-outline-dark">← 목록으로</a>
+</div>
+{% endblock %}

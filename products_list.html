@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product_type }} 상품 목록{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center fw-bold mb-4">{{ product_type }} 상품</h1>
+
+    {% if products %}
+        <div class="list-group">
+            {% for p in products %}
+            <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <div class="me-auto">
+                    <h5 class="mb-1">{{ p['상품명'] }}</h5>
+                    <p class="mb-1">
+                        은행: {{ p['금융회사명'] }} |
+                        {% if product_type == '대출' %}
+                            최저 우대금리: {{ p['대출금리_최저'] }}%
+                        {% else %}
+                            최고 우대금리: {{ p['최고우대금리(%)'] }}% |
+                            가입기간: {{ p['저축기간(개월)'] }}개월
+                        {% endif %}
+                    </p>
+                </div>
+                <a href="/{{ product_type_url }}/detail/{{ p['상품명'] }}" class="btn btn-primary">자세히 보기</a>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted">해당 조건의 상품이 없습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

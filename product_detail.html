@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product['상품명'] }} 상세 정보{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container my-5">
+    <div class="row g-5">
+        <!-- 좌측: 상품 상세 설명 -->
+        <div class="col-lg-8">
+            <h1 class="fw-bold mb-4">{{ product['상품명'] }}</h1>
+            <p class="lead">은행: <strong>{{ product['금융회사명'] }}</strong></p>
+
+            {% if product_type == '대출' %}
+                <p class="lead">최저 금리: <strong>{{ product['기본금리(%)'] }}</strong></p>
+                <p class="lead">대출 한도: <strong>{{ product['대출한도'] }}</strong></p>
+                <p class="lead">상환 방식: <strong>{{ product['만기이자'] }}</strong></p>
+                <p class="lead">가입 대상: <strong>{{ product['가입대상'] }}</strong></p>
+                <p class="lead">대출 기간: <strong>{{ product['저축기간(개월)'] }}</strong></p>
+
+                <hr class="my-4">
+
+                <h4 class="fw-bold">우대 조건</h4>
+                <p>{{ product.get('우대조건', '정보 없음') }}</p>
+            {% else %}
+                <p class="lead">최고 우대금리: <strong>{{ product['최고우대금리(%)'] }}%</strong></p>
+                <p class="lead">가입 기간: <strong>{{ product['저축기간(개월)'] }}개월</strong></p>
+
+                <hr class="my-4">
+
+                <h4 class="fw-bold">우대 조건</h4>
+                <p>{{ product.get('우대조건', '정보 없음') }}</p>
+            {% endif %}
+
+            <div class="mt-5">
+                <a href="/{{ product_type_url }}" class="btn btn-outline-dark me-2">← 목록으로</a>
+                <a href="/" class="btn btn-outline-dark">메인으로</a>
+            </div>
+        </div>
+
+        <!-- 우측: 이자 계산기 -->
+        <div class="col-lg-4">
+            <div class="p-4 border rounded shadow-sm sticky-top" style="top: 100px;">
+                <h4 class="fw-bold mb-4">📈 이자 계산기</h4>
+                <div class="mb-3">
+                    <label class="form-label">금액 (원)</label>
+                    <input type="number" id="amount" class="form-control" placeholder="금액 입력">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        {% if product_type == '대출' %}
+                            최저 금리 (%) (자동)
+                        {% else %}
+                            최고 우대금리 (%) (자동)
+                        {% endif %}
+                    </label>
+                    <input type="text" id="rate" class="form-control"
+                        value="{% if product_type == '대출' %}
+                            {{ product['기본금리(%)'] }}
+                        {% else %}
+                            {{ product['최고우대금리(%)'] }}
+                        {% endif %}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">기간 (개월)</label>
+                    <input type="number" id="period" class="form-control"
+                        value="{% if product_type == '대출' %}{{ product['저축기간(개월)'] if product['저축기간(개월)'] != '정보없음' else 12 }}{% else %}{{ product['저축기간(개월)'] }}{% endif %}">
+                </div>
+                <button class="btn btn-success w-100" onclick="calculateInterest()">계산하기</button>
+                <div class="mt-4">
+                    <p><strong>예상 이자:</strong> <span id="expected-interest">-</span> 원</p>
+                    <p><strong>{% if product_type == '대출' %}총 상환액{% else %}총 수령액{% endif %}:</strong> <span id="total-amount">-</span> 원</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateInterest() {
+        const amount = parseFloat(document.getElementById('amount').value);
+        const rate = parseFloat(document.getElementById('rate').value);
+        const period = parseFloat(document.getElementById('period').value);
+
+        if (!amount || !rate || !period || isNaN(rate)) {
+            alert('금액, 금리, 기간을 정확히 입력하세요.');
+            return;
+        }
+
+        const interest = amount * (rate / 100) * (period / 12);
+        const total = amount + interest;
+
+        document.getElementById('expected-interest').innerText = Math.round(interest).toLocaleString();
+        document.getElementById('total-amount').innerText = Math.round(total).toLocaleString();
+    }
+</script>
+{% endblock %}
